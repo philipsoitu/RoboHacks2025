@@ -1,4 +1,4 @@
-#define SENSOR_PIN 5  // Connect OUT pin to D2
+#define SENSOR_PIN 12  // Connect OUT pin to D2
 
 void setup() {
   pinMode(SENSOR_PIN, INPUT);
@@ -7,7 +7,7 @@ void setup() {
 
 void loop() {
   int sensorState = digitalRead(SENSOR_PIN);
-  if (sensorState == HIGH) {
+  if (sensorState == 0) {
     Serial.println("Obstacle Detected!");  // Some modules output LOW when detecting an object
   } else {
     Serial.println("No Obstacle.");
