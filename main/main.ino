@@ -20,8 +20,20 @@ const int S2 = 16;
 const int S3 = 17;
 const int sensorOut = 18;
 
+
+// pipi
+int redFrequency = 0;
+int greenFrequency = 0;
+int blueFrequency = 0;
+
+// Stores the red. green and blue colors
+int redColor = 0;
+int greenColor = 0;
+int blueColor = 0;
+
 void setup()
 {
+  Serial.begin(9600);
   // Set up motor pins
   pinMode(leftForwardPin, OUTPUT);
   pinMode(leftBackPin, OUTPUT);
@@ -53,7 +65,7 @@ void setup()
 void loop()
 {
   // Move both wheels at the same speed forward (small step)
-  moveForward(100); // 100 for example speed
+  moveForward(50); // 100 for example speed
 
   // Check for obstacles
   if (digitalRead(rightIRPin) == HIGH)
@@ -67,16 +79,16 @@ void loop()
   }
 
   // Check color sensor
-  String colorDetected = detectColor(); // Assume this function returns a string like "green" or "blue"
+  String colorDetected = getColor(); // Assume this function returns a string like "green" or "blue"
   Serial.println(colorDetected);
 
   if (colorDetected == "green")
   {
     // Go forward until no green detected, then stop
-    moveForward(100);
+    moveForward(50);
     while (colorDetected == "green")
     {
-      colorDetected = detectColor();
+      colorDetected = getColor();
     }
     stopMotors();
 
@@ -84,7 +96,7 @@ void loop()
     dropSeed();
 
     // Go forward again
-    moveForward(100);
+    moveForward(50);
   }
 
   if (colorDetected == "blue")
