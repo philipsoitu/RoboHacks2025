@@ -39,9 +39,7 @@ void loop() {
   
   // Reading the output frequency
   redFrequency = pulseIn(sensorOut, LOW);
-  // Remaping the value of the RED (R) frequency from 0 to 255
-  // You must replace with your own values. Here's an example: 
-  // redColor = map(redFrequency, 70, 120, 255,0);
+  // RED : 32 - 75
   redColor = map(redFrequency, 32, 75, 255,0);
   
   // Printing the RED (R) value
@@ -55,9 +53,7 @@ void loop() {
 
   // Reading the output frequency
   greenFrequency = pulseIn(sensorOut, LOW);
-  // Remaping the value of the GREEN (G) frequency from 0 to 255
-  // You must replace with your own values. Here's an example: 
-  // greenColor = map(greenFrequency, 100, 199, 255, 0);
+  // GREEN: 48 - 91
   greenColor = map(greenFrequency, 48, 91, 255, 0);
   
   // Printing the GREEN (G) value  
@@ -71,9 +67,7 @@ void loop() {
 
   // Reading the output frequency
   blueFrequency = pulseIn(sensorOut, LOW);
-  // Remaping the value of the BLUE (B) frequency from 0 to 255
-  // You must replace with your own values. Here's an example: 
-  // blueColor = map(blueFrequency, 38, 84, 255, 0);
+  // BLUE VALUES: 29 - 78
   blueColor = map(blueFrequency, 29, 78, 255, 0);
   
   // Printing the BLUE (B) value 
