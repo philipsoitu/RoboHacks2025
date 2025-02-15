@@ -1,16 +1,27 @@
-#define SENSOR_PIN 12  // Connect OUT pin to D2
+#define RIGHT_IR_PIN 21  // right
+#define LEFT_IR_PIN 20 // left 
 
 void setup() {
-  pinMode(SENSOR_PIN, INPUT);
+  pinMode(RIGHT_IR_PIN, INPUT);
+  pinMode(LEFT_IR_PIN, INPUT);
   Serial.begin(9600);
 }
 
 void loop() {
-  int sensorState = digitalRead(SENSOR_PIN);
-  if (sensorState == 0) {
-    Serial.println("Obstacle Detected!");  // Some modules output LOW when detecting an object
+  int sensorStateRight = digitalRead(RIGHT_IR_PIN);
+  int sensorStateLeft = digitalRead(LEFT_IR_PIN);
+  // Right sensor
+  if (sensorStateRight == 0) {
+    Serial.println("RIGHT object detected!");  // Some modules output LOW when detecting an object
   } else {
-    Serial.println("No Obstacle.");
+    Serial.println("RIGHT nothing.");
+  }
+
+  // Left sensor
+    if (sensorStateLeft == 0) {
+    Serial.println("LEFT object detected!");  // Some modules output LOW when detecting an object
+  } else {
+    Serial.println("LEFT nothing.");
   }
   delay(500);
 }
