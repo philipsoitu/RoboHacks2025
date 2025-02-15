@@ -138,6 +138,7 @@ void turnRight()
   digitalWrite(rightForwardPin, LOW);
   digitalWrite(leftBackPin, LOW);
   digitalWrite(rightBackPin, LOW);
+  delay(100);
 }
 
 void turnLeft()
@@ -149,6 +150,7 @@ void turnLeft()
   digitalWrite(rightForwardPin, HIGH);
   digitalWrite(leftBackPin, LOW);
   digitalWrite(rightBackPin, LOW);
+  delay(100);
 }
 
 String getColor() {
