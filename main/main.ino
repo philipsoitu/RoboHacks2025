@@ -6,8 +6,8 @@ const int MOTOR_DELAY_TIME = 50;
 // Pin Definitions
 const int leftForwardPin = 2;
 const int leftBackPin = 3;
-const int rightForwardPin = 4;
-const int rightBackPin = 5;
+const int rightForwardPin = 5;
+const int rightBackPin = 4;
 const int leftSpeedPin = 10;
 const int rightSpeedPin = 11;
 
@@ -65,46 +65,49 @@ void setup()
 void loop()
 {
   // Move both wheels at the same speed forward (small step)
-  moveForward(50); // 100 for example speed
+  moveForward(100); // 100 for example speed
 
   // Check for obstacles
   if (digitalRead(rightIRPin) == HIGH)
   { // Obstacle detected on the right
+    Serial.println("turning right");
     turnRight();
   }
 
   if (digitalRead(leftIRPin) == HIGH)
   { // Obstacle detected on the left
     turnLeft();
+    Serial.println("turning left");
   }
 
   // Check color sensor
   String colorDetected = getColor(); // Assume this function returns a string like "green" or "blue"
   Serial.println(colorDetected);
 
-  if (colorDetected == "green")
-  {
-    // Go forward until no green detected, then stop
-    moveForward(50);
-    while (colorDetected == "green")
-    {
-      colorDetected = getColor();
-    }
-    stopMotors();
 
-    // Drop seed (assume there’s a function for this)
-    dropSeed();
+  // if (colorDetected == "green")
+  // {
+  //   // Go forward until no green detected, then stop
+  //   moveForward(50);
+  //   while (colorDetected == "green")
+  //   {
+  //     colorDetected = getColor();
+  //   }
+  //   stopMotors();
 
-    // Go forward again
-    moveForward(50);
-  }
+  //   // Drop seed (assume there’s a function for this)
+  //   dropSeed();
 
-  if (colorDetected == "blue")
-  {
-    // Stop for 10 seconds
-    stopMotors();
-    delay(10000);
-  }
+  //   // Go forward again
+  //   moveForward(50);
+  // }
+
+  // if (colorDetected == "blue")
+  // {
+  //   // Stop for 10 seconds
+  //   stopMotors();
+  //   delay(10000);
+  // }
 }
 
 void moveForward(int speed)
@@ -116,6 +119,9 @@ void moveForward(int speed)
   digitalWrite(rightForwardPin, HIGH);
   digitalWrite(leftBackPin, LOW);
   digitalWrite(rightBackPin, LOW);
+  delay(100);
+  stopMotors();
+  Serial.println("forwards");
 }
 
 void stopMotors()
@@ -139,6 +145,7 @@ void turnRight()
   digitalWrite(leftBackPin, LOW);
   digitalWrite(rightBackPin, LOW);
   delay(100);
+  stopMotors();
 }
 
 void turnLeft()
@@ -151,6 +158,7 @@ void turnLeft()
   digitalWrite(leftBackPin, LOW);
   digitalWrite(rightBackPin, LOW);
   delay(100);
+  stopMotors();
 }
 
 String getColor() {
