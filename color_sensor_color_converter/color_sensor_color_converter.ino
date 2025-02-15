@@ -87,3 +87,59 @@ void loop() {
     Serial.println(" - BLUE detected!");
   }
 }
+
+String getColor() {
+  // Setting RED (R) filtered photodiodes to be read
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,LOW);
+  
+  // Reading the output frequency
+  redFrequency = pulseIn(sensorOut, LOW);
+  // RED : 32 - 75
+  redColor = map(redFrequency, 32, 75, 255,0);
+  
+  // Printing the RED (R) value
+  // Serial.print("R = ");
+  // Serial.print(redColor);
+  delay(100);
+  
+  // Setting GREEN (G) filtered photodiodes to be read
+  digitalWrite(S2,HIGH);
+  digitalWrite(S3,HIGH);
+
+  // Reading the output frequency
+  greenFrequency = pulseIn(sensorOut, LOW);
+  // GREEN: 48 - 91
+  greenColor = map(greenFrequency, 48, 91, 255, 0);
+  
+  // Printing the GREEN (G) value  
+  // Serial.print(" G = ");
+  // Serial.print(greenColor);
+  delay(100);
+ 
+  // Setting BLUE (B) filtered photodiodes to be read
+  digitalWrite(S2,LOW);
+  digitalWrite(S3,HIGH);
+
+  // Reading the output frequency
+  blueFrequency = pulseIn(sensorOut, LOW);
+  // BLUE VALUES: 29 - 78
+  blueColor = map(blueFrequency, 29, 78, 255, 0);
+  
+  // Printing the BLUE (B) value 
+  // Serial.print(" B = ");
+  // Serial.print(blueColor);
+  delay(100);
+
+  // Checks the current detected color and prints
+  // a message in the serial monitor
+  if(redColor > greenColor && redColor > blueColor){
+      return "RED";
+  }
+  if(greenColor > redColor && greenColor > blueColor){
+    return "GREEN";
+  }
+  if(blueColor > redColor && blueColor > greenColor){
+    return "BLUE";
+  }
+}
